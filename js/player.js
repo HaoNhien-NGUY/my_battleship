@@ -85,6 +85,9 @@
             });
         },
         renderShips: function (grid) {
+        },
+        setGame: function () {
+            console.log("objet setGame");
         }
     };
 
