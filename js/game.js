@@ -76,30 +76,30 @@
             }
 
             switch (this.currentPhase) {
-                case this.PHASE_GAME_OVER:
-                    // detection de la fin de partie
-                    if (!this.gameIsOver()) {
-                        // le jeu n'est pas terminé on recommence un tour de jeu
-                        this.currentPhase = this.phaseOrder[this.playerTurnPhaseIndex];
-                    }
-                case this.PHASE_INIT_PLAYER:
-                    utils.info("Placez vos bateaux");
-                    break;
-                case this.PHASE_INIT_OPPONENT:
-                    this.wait();
-                    utils.info("En attente de votre adversaire");
-                    this.players[1].isShipOk(function () {
-                        self.stopWaiting();
-                        self.goNextPhase();
-                    });
-                    break;
-                case this.PHASE_PLAY_PLAYER:
-                    utils.info("A vous de jouer, choisissez une case !");
-                    break;
-                case this.PHASE_PLAY_OPPONENT:
-                    utils.info("A votre adversaire de jouer...");
-                    this.players[1].play();
-                    break;
+            case this.PHASE_GAME_OVER:
+                // detection de la fin de partie
+                if (!this.gameIsOver()) {
+                    // le jeu n'est pas terminé on recommence un tour de jeu
+                    this.currentPhase = this.phaseOrder[this.playerTurnPhaseIndex];
+                }
+            case this.PHASE_INIT_PLAYER:
+                utils.info("Placez vos bateaux");
+                break;
+            case this.PHASE_INIT_OPPONENT:
+                this.wait();
+                utils.info("En attente de votre adversaire");
+                this.players[1].isShipOk(function () {
+                    self.stopWaiting();
+                    self.goNextPhase();
+                });
+                break;
+            case this.PHASE_PLAY_PLAYER:
+                utils.info("A vous de jouer, choisissez une case !");
+                break;
+            case this.PHASE_PLAY_OPPONENT:
+                utils.info("A votre adversaire de jouer...");
+                this.players[1].play();
+                break;
             }
 
         },
@@ -151,7 +151,7 @@
                 // si on est dans la phase de placement des bateau
                 if (this.getPhase() === this.PHASE_INIT_PLAYER) {
                     // on enregistre la position du bateau, si cela se passe bien (la fonction renvoie true) on continue
-                    if (this.players[0].setActiveShipPosition(utils.eq(e.target)-2, utils.eq(e.target.parentNode))) {
+                    if (this.players[0].setActiveShipPosition(utils.eq(e.target), utils.eq(e.target.parentNode))) {
                         // et on passe au bateau suivant (si il n'y en plus la fonction retournera false)
                         if (!this.players[0].activateNextShip()) {
                             this.wait();
@@ -218,13 +218,7 @@
             this.players[0].renderTries(this.grid);
         },
         renderMiniMap: function () {
-            // let leftColumn = document.querySelector('.left');
-            // let copyMainGrid = this.grid.cloneNode(true)
-            // copyMainGrid.classList.replace('main-grid', 'mini-grid')
-            // leftColumn.replaceChild(copyMainGrid, this.miniGrid)
-
             var ships = this.players[0].fleet;
-
             ships.forEach((ship) => {
                 this.miniGrid.appendChild(ship.dom);
             });
