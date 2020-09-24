@@ -32,7 +32,7 @@
 
             // initialisation
             this.grid = document.querySelector('.board .main-grid');
-            this.miniGrid = document.querySelector('.board .mini-grid');
+            this.miniGrid = document.querySelector('.mini-grid');
 
             // défini l'ordre des phase de jeu
             this.phaseOrder = [
@@ -215,9 +215,15 @@
 
         },
         renderMap: function () {
-            this.players[0].renderTries(this.grid);
+            console.log(this.grid);
+            // this.players[0].renderTries(this.grid);
         },
         renderMiniMap: function () {
+            var ships = this.players[0].fleet;
+            ships.forEach((ship) => {
+                console.log(ship);
+                this.miniGrid.appendChild(ship.dom);
+            });
         }
     };
 
