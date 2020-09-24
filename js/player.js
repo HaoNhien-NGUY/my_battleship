@@ -52,8 +52,8 @@
         },
         clearPreview: function () {
             this.fleet.forEach(function (ship) {
-                if (sheep.dom.parentNode) {
-                    sheep.dom.parentNode.removeChild(ship.dom);
+                if (ship.dom.parentNode) {
+                    ship.dom.parentNode.removeChild(ship.dom);
                 }
             });
         },
@@ -88,6 +88,10 @@
         },
         setGame: function () {
             console.log("objet setGame");
+        },
+        isShipOk: function (calback) {
+            console.log("objet isShipOk");
+            calback();
         }
     };
 
