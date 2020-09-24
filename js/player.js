@@ -53,7 +53,7 @@
         clearPreview: function () {
             this.fleet.forEach(function (ship) {
                 if (ship.dom.parentNode) {
-                    ship.dom.parentNode.removeChild(ship.dom);
+                    // ship.dom.parentNode.removeChild(ship.dom);
                 }
             });
         },
@@ -89,9 +89,9 @@
         setGame: function () {
             console.log("objet setGame");
         },
-        isShipOk: function (calback) {
+        isShipOk: function (callback) {
             console.log("objet isShipOk");
-            calback();
+            callback();
         }
     };
 
