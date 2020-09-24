@@ -76,30 +76,30 @@
             }
 
             switch (this.currentPhase) {
-            case this.PHASE_GAME_OVER:
-                // detection de la fin de partie
-                if (!this.gameIsOver()) {
-                    // le jeu n'est pas terminé on recommence un tour de jeu
-                    this.currentPhase = this.phaseOrder[this.playerTurnPhaseIndex];
-                }
-            case this.PHASE_INIT_PLAYER:
-                utils.info("Placez vos bateaux");
-                break;
-            case this.PHASE_INIT_OPPONENT:
-                this.wait();
-                utils.info("En attente de votre adversaire");
-                this.players[1].isShipOk(function () {
-                    self.stopWaiting();
-                    self.goNextPhase();
-                });
-                break;
-            case this.PHASE_PLAY_PLAYER:
-                utils.info("A vous de jouer, choisissez une case !");
-                break;
-            case this.PHASE_PLAY_OPPONENT:
-                utils.info("A votre adversaire de jouer...");
-                this.players[1].play();
-                break;
+                case this.PHASE_GAME_OVER:
+                    // detection de la fin de partie
+                    if (!this.gameIsOver()) {
+                        // le jeu n'est pas terminé on recommence un tour de jeu
+                        this.currentPhase = this.phaseOrder[this.playerTurnPhaseIndex];
+                    }
+                case this.PHASE_INIT_PLAYER:
+                    utils.info("Placez vos bateaux");
+                    break;
+                case this.PHASE_INIT_OPPONENT:
+                    this.wait();
+                    utils.info("En attente de votre adversaire");
+                    this.players[1].isShipOk(function () {
+                        self.stopWaiting();
+                        self.goNextPhase();
+                    });
+                    break;
+                case this.PHASE_PLAY_PLAYER:
+                    utils.info("A vous de jouer, choisissez une case !");
+                    break;
+                case this.PHASE_PLAY_OPPONENT:
+                    utils.info("A votre adversaire de jouer...");
+                    this.players[1].play();
+                    break;
             }
 
         },
