@@ -4,7 +4,7 @@
 (function (global) {
     "use strict";
 
-    var sheep = {dom: {parentNode: {removeChild: function () {}}}};
+    var sheep = { dom: { parentNode: { removeChild: function () { } } } };
 
     var player = {
         grid: [],
@@ -41,8 +41,23 @@
         },
         setActiveShipPosition: function (x, y) {
             var ship = this.fleet[this.activeShip];
-            var i = 0;
+            let i = 0;
+            if (ship.getLife() == 3) x++;
 
+            if (x < 0 || y < 0 || (x + ship.getLife() > 10)
+                // || x + ship.getLife() > 10  I HAVE TO ADD A CONDITION ON THIS ONE IF IT IS VERTICAL)
+            ) {
+                return false
+            }
+
+            while (i < ship.getLife()) {
+                if (this.grid[y][x + i] > 0) {
+                    return false;
+                }
+                i += 1;
+            }
+
+            i = 0;
             while (i < ship.getLife()) {
                 this.grid[y][x + i] = ship.getId();
                 i += 1;
