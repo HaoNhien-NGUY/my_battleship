@@ -124,6 +124,11 @@
             // on ajoute des acouteur uniquement sur la grid (délégation d'événement)
             this.grid.addEventListener('mousemove', _.bind(this.handleMouseMove, this));
             this.grid.addEventListener('click', _.bind(this.handleClick, this));
+            this.grid.addEventListener('contextmenu', _.bind(this.handleClickRight, this));
+        },
+        handleClickRight: function (e) {
+            e.preventDefault();
+            console.log('success');
         },
         handleMouseMove: function (e) {
             // on est dans la phase de placement des bateau
