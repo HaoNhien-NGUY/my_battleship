@@ -159,7 +159,7 @@
                                 // si le placement est confirmé
                                 self.stopWaiting();
                                 self.renderMiniMap();
-                                self.players[0].clearPreview();
+                                // self.players[0].clearPreview();
                                 self.goNextPhase();
                             }, function () {
                                 self.stopWaiting();

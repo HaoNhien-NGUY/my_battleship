@@ -68,7 +68,7 @@
         clearPreview: function () {
             this.fleet.forEach(function (ship) {
                 if (ship.dom.parentNode) {
-                    // ship.dom.parentNode.removeChild(ship.dom);
+                    ship.dom.parentNode.removeChild(ship.dom);
                 }
             });
         },
