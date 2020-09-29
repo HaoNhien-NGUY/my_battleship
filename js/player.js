@@ -4,7 +4,7 @@
 (function (global) {
     "use strict";
 
-    var sheep = { dom: { parentNode: { removeChild: function () { } } } };
+    // var sheep = { dom: { parentNode: { removeChild: function () { } } } };
 
     var player = {
         grid: [],

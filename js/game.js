@@ -129,6 +129,15 @@
         handleClickRight: function (e) {
             e.preventDefault();
             console.log('success');
+            if (this.getPhase() === this.PHASE_INIT_PLAYER && e.target.classList.contains('cell')) {
+                var ship = this.players[0].fleet[this.players[0].activeShip];
+                if (ship.dom.parentNode) {
+                    var newWidth = ship.dom.style.height;
+                    ship.dom.style.height = ship.dom.style.width;
+                    ship.dom.style.width = newWidth;
+                    ship.dom.horizontal = (ship.dom.clientWidth > ship.dom.clientHeight);
+                }
+            }
         },
         handleMouseMove: function (e) {
             // on est dans la phase de placement des bateau
@@ -143,8 +152,13 @@
                 }
 
                 // décalage visuelle, le point d'ancrage du curseur est au milieu du bateau
-                ship.dom.style.top = "" + (utils.eq(e.target.parentNode)) * utils.CELL_SIZE - (600 + this.players[0].activeShip * 60) + "px";
-                ship.dom.style.left = "" + utils.eq(e.target) * utils.CELL_SIZE - Math.floor(ship.getLife() / 2) * utils.CELL_SIZE + "px";
+                if (ship.dom.horizontal) {
+                    ship.dom.style.top = "" + (utils.eq(e.target.parentNode)) * utils.CELL_SIZE - (600 + this.players[0].activeShip * 60) + "px";
+                    ship.dom.style.left = "" + utils.eq(e.target) * utils.CELL_SIZE - Math.floor(ship.getLife() / 2) * utils.CELL_SIZE + "px";
+                } else {
+                    ship.dom.style.top = "" + (utils.eq(e.target.parentNode)) * utils.CELL_SIZE - (600 + this.players[0].activeShip * 60) + "px";
+                    ship.dom.style.left = "" + utils.eq(e.target) * utils.CELL_SIZE - Math.floor(ship.getLife() / 2) * utils.CELL_SIZE + "px";
+                }
             }
         },
         handleClick: function (e) {
@@ -156,7 +170,7 @@
                 // si on est dans la phase de placement des bateau
                 if (this.getPhase() === this.PHASE_INIT_PLAYER) {
                     // on enregistre la position du bateau, si cela se passe bien (la fonction renvoie true) on continue
-                    if (this.players[0].setActiveShipPosition(utils.eq(e.target)-2, utils.eq(e.target.parentNode))) {
+                    if (this.players[0].setActiveShipPosition(utils.eq(e.target) - 2, utils.eq(e.target.parentNode))) {
                         // et on passe au bateau suivant (si il n'y en plus la fonction retournera false)
                         if (!this.players[0].activateNextShip()) {
                             this.wait();
