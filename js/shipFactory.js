@@ -45,18 +45,16 @@
             var newWidth = this.dom.style.height;
             this.dom.style.height = this.dom.style.width;
             this.dom.style.width = newWidth;
+            this.dom.horizontal = (this.dom.clientWidth > this.dom.clientHeight);
         },
         followCursor: function (gridShift, row, col) {
-            if (this.dom.clientWidth > this.dom.clientHeight) {
+            if (this.dom.horizontal) {
                 this.dom.style.top = "" + (utils.eq(row)) * utils.CELL_SIZE - gridShift + "px";
                 this.dom.style.left = "" + utils.eq(col) * utils.CELL_SIZE - Math.floor(this.getLife() / 2) * utils.CELL_SIZE + "px";
             } else {
                 this.dom.style.top = "" + (utils.eq(row)) * utils.CELL_SIZE - gridShift - Math.floor(this.getLife() / 2) * utils.CELL_SIZE + "px";
                 this.dom.style.left = "" + utils.eq(col) * utils.CELL_SIZE + "px";
             }
-        },
-        isHorizontal: function () {
-            return (this.dom.clientWidth > this.dom.clientHeight);
         },
         init: function () {
             this.id = getShipNewIndex();
@@ -67,6 +65,7 @@
             this.dom.style.position = "relative";
             this.dom.style.opacity = "0.8";
             this.dom.style.backgroundColor = this.color;
+            this.dom.horizontal = true;
         }
     };
 
