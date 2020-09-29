@@ -43,7 +43,7 @@
             var ship = this.fleet[this.activeShip];
             let i = 0;
 
-            if (ship.dom.horizontal) {
+            if (ship.getIsHorizontal()) {
                 if (ship.getLife() == 3) x++;
 
                 while (i < ship.getLife()) {
