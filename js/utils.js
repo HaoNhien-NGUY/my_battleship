@@ -82,7 +82,7 @@
 
             for (let i = 0; i < player.activeShip; i++) {
                 let ship = player.fleet[i];
-                gridShift = ship.dom.horizontal ? (gridShift + 60) : (gridShift + (60 * ship.getLife()));
+                gridShift = ship.getIsHorizontal() ? (gridShift + 60) : (gridShift + (60 * ship.getLife()));
             }
             return gridShift;
         }

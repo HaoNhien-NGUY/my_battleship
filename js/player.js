@@ -64,7 +64,7 @@
             //     i += 1;
             // }
 
-            if (ship.dom.horizontal) {
+            if (ship.getIsHorizontal()) {
                 if (x < 0 || y < 0 || (x + ship.getLife() > 10)) {
                     console.log('return false');
                     console.log(x);
