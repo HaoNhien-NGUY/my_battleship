@@ -55,6 +55,9 @@
                 this.dom.style.left = "" + utils.eq(col) * utils.CELL_SIZE + "px";
             }
         },
+        isHorionzatal: function () {
+            return (this.dom.clientWidth > this.dom.clientHeight);
+        },
         init: function () {
             this.id = getShipNewIndex();
             
