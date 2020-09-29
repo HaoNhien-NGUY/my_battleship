@@ -156,6 +156,7 @@
             }
         },
         handleClick: function (e) {
+            console.log(this.players[0].grid);
             // self garde une référence vers "this" en cas de changement de scope
             var self = this;
 

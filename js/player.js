@@ -42,25 +42,51 @@
         setActiveShipPosition: function (x, y) {
             var ship = this.fleet[this.activeShip];
             let i = 0;
-            if (ship.getLife() == 3) x++;
+            if (ship.getLife() == 3) x++, y++;
 
-            if (x < 0 || y < 0 || (x + ship.getLife() > 10)
-                // || x + ship.getLife() > 10  I HAVE TO ADD A CONDITION ON THIS ONE IF IT IS VERTICAL)
-            ) {
-                return false
-            }
+            // if (x < 0 || y < 0 || (x + ship.getLife() > 10)
+            //     // || x + ship.getLife() > 10  I HAVE TO ADD A CONDITION ON THIS ONE IF IT IS VERTICAL)
+            // ) {
+            //     return false
+            // }
 
             while (i < ship.getLife()) {
-                if (this.grid[y][x + i] > 0) {
+                if (this.grid[y][x + i] > 0 || this.grid[y + i][x] > 0) {
+                    console.log(this.grid[y][x + i]);
                     return false;
                 }
                 i += 1;
             }
 
-            i = 0;
-            while (i < ship.getLife()) {
-                this.grid[y][x + i] = ship.getId();
-                i += 1;
+            // i = 0;
+            // while (i < ship.getLife()) {
+            //     this.grid[y][x + i] = ship.getId();
+            //     i += 1;
+            // }
+
+            if (ship.dom.horizontal) {
+                if (x < 0 || y < 0 || (x + ship.getLife() > 10)) {
+                    console.log('return false');
+                    console.log(x);
+                    return false
+                }
+                i = 0;
+                while (i < ship.getLife()) {
+                    this.grid[y][x + i] = ship.getId();
+                    i += 1;
+                }
+            } else {
+                console.log(y);
+                if ( y < 2 || (y + ship.getLife() > 10)) {
+                    console.log('return false, y=' + y);
+                    return false
+                }
+                i = 0;
+                while (i < ship.getLife()) {
+                    this.grid[y + i - 2][x + 2] = ship.getId();
+                    console.log(this.grid[y + i - 2][x + 2]);
+                    i += 1;
+                }
             }
 
             return true;
