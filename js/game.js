@@ -128,16 +128,14 @@
         },
         handleClickRight: function (e) {
             e.preventDefault();
-            console.log('success');
             if (this.getPhase() === this.PHASE_INIT_PLAYER && e.target.classList.contains('cell')) {
                 var ship = this.players[0].fleet[this.players[0].activeShip];
                 if (ship.dom.parentNode) {
-                    var newWidth = ship.dom.style.height;
-                    ship.dom.style.height = ship.dom.style.width;
-                    ship.dom.style.width = newWidth;
-                    ship.dom.horizontal = (ship.dom.clientWidth > ship.dom.clientHeight);
+                    ship.changeOrientation();
                 }
             }
+            console.log(this.players[0].grid)
+
         },
         handleMouseMove: function (e) {
             // on est dans la phase de placement des bateau
@@ -152,12 +150,14 @@
                 }
 
                 // décalage visuelle, le point d'ancrage du curseur est au milieu du bateau
+                let gridShift = utils.calculateGridShift(this.players[0]);
+
                 if (ship.dom.horizontal) {
-                    ship.dom.style.top = "" + (utils.eq(e.target.parentNode)) * utils.CELL_SIZE - (600 + this.players[0].activeShip * 60) + "px";
+                    ship.dom.style.top = "" + (utils.eq(e.target.parentNode)) * utils.CELL_SIZE - gridShift + "px";
                     ship.dom.style.left = "" + utils.eq(e.target) * utils.CELL_SIZE - Math.floor(ship.getLife() / 2) * utils.CELL_SIZE + "px";
                 } else {
-                    ship.dom.style.top = "" + (utils.eq(e.target.parentNode)) * utils.CELL_SIZE - (600 + this.players[0].activeShip * 60) + "px";
-                    ship.dom.style.left = "" + utils.eq(e.target) * utils.CELL_SIZE - Math.floor(ship.getLife() / 2) * utils.CELL_SIZE + "px";
+                    ship.dom.style.top = "" + (utils.eq(e.target.parentNode)) * utils.CELL_SIZE - gridShift - Math.floor(ship.getLife() / 2) * utils.CELL_SIZE + "px";
+                    ship.dom.style.left = "" + utils.eq(e.target) * utils.CELL_SIZE + "px";
                 }
             }
         },

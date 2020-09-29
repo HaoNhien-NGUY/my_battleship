@@ -76,6 +76,15 @@
             confirmBox.style.display = 'block';
 
             msgContainer.innerHTML = message;
+        },
+        calculateGridShift: function (player) {
+            let gridShift = 600;
+
+            for (let i = 0; i < player.activeShip; i++) {
+                let ship = player.fleet[i];
+                gridShift = ship.dom.horizontal ? (gridShift + 60) : (gridShift + (60 * ship.getLife()));
+            }
+            return gridShift;
         }
     };
 

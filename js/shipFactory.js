@@ -41,6 +41,12 @@
         getId: function () {
             return this.id;
         },
+        changeOrientation: function () {
+            var newWidth = this.dom.style.height;
+            this.dom.style.height = this.dom.style.width;
+            this.dom.style.width = newWidth;
+            this.dom.horizontal = (this.dom.clientWidth > this.dom.clientHeight);
+        },
         init: function () {
             this.id = getShipNewIndex();
             
