@@ -47,6 +47,15 @@
             this.dom.style.width = newWidth;
             this.dom.horizontal = (this.dom.clientWidth > this.dom.clientHeight);
         },
+        followCursor: function (gridShift, row, col) {
+            if (this.dom.horizontal) {
+                this.dom.style.top = "" + (utils.eq(row)) * utils.CELL_SIZE - gridShift + "px";
+                this.dom.style.left = "" + utils.eq(col) * utils.CELL_SIZE - Math.floor(this.getLife() / 2) * utils.CELL_SIZE + "px";
+            } else {
+                this.dom.style.top = "" + (utils.eq(row)) * utils.CELL_SIZE - gridShift - Math.floor(this.getLife() / 2) * utils.CELL_SIZE + "px";
+                this.dom.style.left = "" + utils.eq(col) * utils.CELL_SIZE + "px";
+            }
+        },
         init: function () {
             this.id = getShipNewIndex();
             

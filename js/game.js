@@ -134,8 +134,9 @@
                     ship.changeOrientation();
                 }
             }
-            console.log(this.players[0].grid)
 
+            let gridShift = utils.calculateGridShift(this.players[0]);
+            ship.followCursor(gridShift, e.target.parentNode, e.target);
         },
         handleMouseMove: function (e) {
             // on est dans la phase de placement des bateau
@@ -151,14 +152,7 @@
 
                 // décalage visuelle, le point d'ancrage du curseur est au milieu du bateau
                 let gridShift = utils.calculateGridShift(this.players[0]);
-
-                if (ship.dom.horizontal) {
-                    ship.dom.style.top = "" + (utils.eq(e.target.parentNode)) * utils.CELL_SIZE - gridShift + "px";
-                    ship.dom.style.left = "" + utils.eq(e.target) * utils.CELL_SIZE - Math.floor(ship.getLife() / 2) * utils.CELL_SIZE + "px";
-                } else {
-                    ship.dom.style.top = "" + (utils.eq(e.target.parentNode)) * utils.CELL_SIZE - gridShift - Math.floor(ship.getLife() / 2) * utils.CELL_SIZE + "px";
-                    ship.dom.style.left = "" + utils.eq(e.target) * utils.CELL_SIZE + "px";
-                }
+                ship.followCursor(gridShift, e.target.parentNode, e.target);
             }
         },
         handleClick: function (e) {
