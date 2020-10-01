@@ -20,8 +20,8 @@
             this.fleet.push(shipFactory.build(shipFactory.TYPE_SMALL_SHIP));
 
             // créé les grilles
-            this.grid = utils.createGrid(10, 10);
-            this.tries = utils.createGrid(10, 10);
+            this.grid = utils.createGrid(utils.GRID_LINE, utils.GRID_COLUMNS);
+            this.tries = utils.createGrid(utils.GRID_LINE, utils.GRID_COLUMNS);
         },
         play: function (col, line) {
             // appel la fonction fire du game, et lui passe une calback pour récupérer le résultat du tir
@@ -96,7 +96,7 @@
             this.clearPreview();
 
             this.activeShip = 0;
-            this.grid = utils.createGrid(10, 10);
+            this.grid = utils.createGrid(utils.GRID_LINE, utils.GRID_COLUMNS);
         },
         activateNextShip: function () {
             if (this.activeShip < this.fleet.length - 1) {
@@ -121,8 +121,8 @@
         },
         renderShips: function (grid) {
         },
-        setGame: function () {
-            console.log("objet setGame");
+        setGame: function (game) {
+            this.game = game;
         },
         isShipOk: function (callback) {
             console.log("objet isShipOk");

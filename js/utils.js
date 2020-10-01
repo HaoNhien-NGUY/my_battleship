@@ -6,6 +6,8 @@
 
     global.utils = {
         CELL_SIZE: 60,
+        GRID_LINE: 10,
+        GRID_COLUMNS: 10,
         // retourne la position (démarre à 1) du noeud passé en paramètre dans son parent
         eq: function (node) {
             var p = node.parentNode;
