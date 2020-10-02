@@ -22,9 +22,21 @@
         },
         play: function () {
             var self = this;
+            let column;
+            let line;
+
+            do {
+                column = Math.floor(Math.random() * utils.GRID_COLUMNS);
+                line = Math.floor(Math.random() * utils.GRID_LINE);
+
+            } while (self.tries[line][column] !== 0);
+
             setTimeout(function () {
                 self.game.fire(this, 0, 0, function (hasSucced) {
-                    self.tries[0][0] = hasSucced;
+                    console.log(self.tries[line][column]);
+                    console.log(line);
+                    console.log(column);
+                    self.tries[line][column] = hasSucced;
                 });
             }, 2000);
         },
