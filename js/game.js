@@ -76,6 +76,7 @@
             }
 
             console.log(this.currentPhase);
+            console.log(this.players[0].tries);
 
             switch (this.currentPhase) {
                 case this.PHASE_GAME_OVER:
@@ -89,7 +90,6 @@
                     break;
                 case this.PHASE_INIT_PLAYER:
                     utils.info("Placez vos bateaux");
-                    console.log("placez vos bateaux");
                     break;
                 case this.PHASE_INIT_OPPONENT:
                     this.wait();
@@ -192,6 +192,7 @@
                     // si on est dans la phase de jeu (du joueur humain)
                 } else if (this.getPhase() === this.PHASE_PLAY_PLAYER) {
                     this.players[0].play(utils.eq(e.target), utils.eq(e.target.parentNode));
+                    self.renderMap();
                 }
             }
         },

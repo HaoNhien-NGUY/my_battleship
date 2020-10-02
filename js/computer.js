@@ -33,28 +33,18 @@
             var j;
 
             this.fleet.forEach(function (ship, i) {
-                // j = 0;
-                // while (j < ship.life) {
-                //     console.log(ship.getId());
-                //     this.grid[i][j] = ship.getId();
-                //     j += 1;
-                // }
                 let isHorizontal;
                 let column;
                 let line;
                 do {
                     isHorizontal = Math.floor(Math.random() * 2);
-                    // console.log(`is Horizontal: ${isHorizontal}`);
                     column = Math.floor(Math.random() * utils.GRID_COLUMNS);
-                    // console.log(`column: ${column}`);
                     line = Math.floor(Math.random() * utils.GRID_LINE);
-                    // console.log(`line: ${line}`);
-                    // console.log(this.grid);
 
                 } while (!this.setActiveShipPosition(column, line, ship, isHorizontal))
             }, this);
 
-            // console.log(this.grid);
+            console.log(this.grid);
 
             setTimeout(function () {
                 callback();
