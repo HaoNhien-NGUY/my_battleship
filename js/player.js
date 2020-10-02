@@ -66,8 +66,7 @@
                 if (ship.getLife() == 3) y++;
 
                 while (i < ship.getLife()) {
-                    console.log(y + i - 2);
-                    if (this.grid[y + i - 2][x + 2] > 0) {
+                    if (!this.grid[y + i - 2] || this.grid[y + i - 2][x + 2] > 0) {
                         return false;
                     }
                     i += 1;
