@@ -24,6 +24,10 @@
             this.tries = utils.createGrid(utils.GRID_LINE, utils.GRID_COLUMNS);
         },
         play: function (col, line) {
+            if (this.tries[line][col] !== 0) {
+                return ;
+            }
+
             // appel la fonction fire du game, et lui passe une calback pour récupérer le résultat du tir
             this.game.fire(this, col, line, _.bind(function (hasSucced) {
                 this.tries[line][col] = hasSucced;
