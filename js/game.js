@@ -69,11 +69,13 @@
             var ci = this.phaseOrder.indexOf(this.currentPhase);
             var self = this;
 
-            if (ci !== this.phaseOrder.length - 1) {
+            if (!this.gameIsOver() && ci !== this.phaseOrder.length - 1) {
                 this.currentPhase = this.phaseOrder[ci + 1];
             } else {
                 this.currentPhase = this.phaseOrder[0];
             }
+
+            console.log(this.currentPhase);
 
             switch (this.currentPhase) {
                 case this.PHASE_GAME_OVER:
@@ -81,7 +83,10 @@
                     if (!this.gameIsOver()) {
                         // le jeu n'est pas terminé on recommence un tour de jeu
                         this.currentPhase = this.phaseOrder[this.playerTurnPhaseIndex];
+                        console.log(`phase not over: ${this.currentPhase}`);
+                        utils.info("A vous de jouer, choisissez une case !");
                     }
+                    break;
                 case this.PHASE_INIT_PLAYER:
                     utils.info("Placez vos bateaux");
                     console.log("placez vos bateaux");
