@@ -89,7 +89,7 @@
                 if (ship.getLife() == 3) y++;
 
                 while (i < ship.getLife()) {
-                    if (!this.grid[y + i - 2] || this.grid[y + i - 2][x + 2] > 0) {
+                    if (!this.grid[y + i - 2] || this.grid[y + i - 2][x] > 0) {
                         return false;
                     }
                     i += 1;
@@ -101,7 +101,7 @@
 
                 i = 0;
                 while (i < ship.getLife()) {
-                    this.grid[y + i - 2][x + 2] = ship.getId();
+                    this.grid[y + i - 2][x] = ship.getId();
                     i += 1;
                 }
             }
