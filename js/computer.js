@@ -44,17 +44,17 @@
                 let line;
                 do {
                     isHorizontal = Math.floor(Math.random() * 2);
-                    console.log(`is Horizontal: ${isHorizontal}`);
+                    // console.log(`is Horizontal: ${isHorizontal}`);
                     column = Math.floor(Math.random() * utils.GRID_COLUMNS);
-                    console.log(`column: ${column}`);
+                    // console.log(`column: ${column}`);
                     line = Math.floor(Math.random() * utils.GRID_LINE);
-                    console.log(`line: ${line}`);
-                    console.log(this.grid);
+                    // console.log(`line: ${line}`);
+                    // console.log(this.grid);
 
                 } while (!this.setActiveShipPosition(column, line, ship, isHorizontal))
             }, this);
 
-            console.log(this.grid);
+            // console.log(this.grid);
 
             setTimeout(function () {
                 callback();

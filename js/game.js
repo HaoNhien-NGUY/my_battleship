@@ -42,7 +42,7 @@
                 this.PHASE_PLAY_OPPONENT,
                 this.PHASE_GAME_OVER
             ];
-            this.playerTurnPhaseIndex = 0;
+            // this.playerTurnPhaseIndex = 0;
 
             // initialise les joueurs
             this.setupPlayers();
@@ -84,6 +84,7 @@
                     }
                 case this.PHASE_INIT_PLAYER:
                     utils.info("Placez vos bateaux");
+                    console.log("placez vos bateaux");
                     break;
                 case this.PHASE_INIT_OPPONENT:
                     this.wait();
@@ -164,6 +165,7 @@
             if (e.target.classList.contains('cell')) {
                 // si on est dans la phase de placement des bateau
                 if (this.getPhase() === this.PHASE_INIT_PLAYER) {
+                    console.log("click phase init player");
                     // on enregistre la position du bateau, si cela se passe bien (la fonction renvoie true) on continue
                     if (this.players[0].setActiveShipPosition(utils.eq(e.target) - 2, utils.eq(e.target.parentNode))) {
                         // et on passe au bateau suivant (si il n'y en plus la fonction retournera false)
