@@ -4,8 +4,6 @@
 (function (global) {
     "use strict";
 
-    // var sheep = { dom: { parentNode: { removeChild: function () { } } } };
-
     var player = {
         grid: [],
         tries: [],
@@ -25,7 +23,7 @@
         },
         play: function (col, line) {
             if (this.tries[line][col] !== 0) {
-                return ;
+                return;
             }
 
             // appel la fonction fire du game, et lui passe une calback pour récupérer le résultat du tir
@@ -90,6 +88,9 @@
         },
         clearPreview: function () {
             this.fleet.forEach(function (ship) {
+                if (!ship.getIsHorizontal()) {
+                    ship.changeOrientation();
+                }
                 if (ship.dom.parentNode) {
                     ship.dom.parentNode.removeChild(ship.dom);
                 }

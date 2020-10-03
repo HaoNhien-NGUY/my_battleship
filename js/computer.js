@@ -9,21 +9,12 @@
         tries: [],
         fleet: [],
         game: null,
-        init: function () {
-            // créé la flotte
-            this.fleet.push(shipFactory.build(shipFactory.TYPE_BATTLESHIP));
-            this.fleet.push(shipFactory.build(shipFactory.TYPE_DESTROYER));
-            this.fleet.push(shipFactory.build(shipFactory.TYPE_SUBMARINE));
-            this.fleet.push(shipFactory.build(shipFactory.TYPE_SMALL_SHIP));
-
-            // créé les grilles
-            this.grid = utils.createGrid(utils.GRID_LINE, utils.GRID_COLUMNS);
-            this.tries = utils.createGrid(utils.GRID_LINE, utils.GRID_COLUMNS);
-        },
         play: function () {
             var self = this;
             let column;
             let line;
+
+            //refaire ca, en prenant les tries et en cherchant les cells 0, et random l'array retourne
 
             do {
                 column = Math.floor(Math.random() * utils.GRID_COLUMNS);
@@ -33,9 +24,9 @@
 
             setTimeout(function () {
                 self.game.fire(this, 0, 0, function (hasSucced) {
-                    console.log(self.tries[line][column]);
-                    console.log(line);
-                    console.log(column);
+                    // console.log(self.tries[line][column]);
+                    // console.log(line);
+                    // console.log(column);
                     self.tries[line][column] = hasSucced;
                 });
             }, 2000);
@@ -56,14 +47,12 @@
                 } while (!this.setActiveShipPosition(column, line, ship, isHorizontal))
             }, this);
 
+            console.log('computer grid');
             console.log(this.grid);
 
             setTimeout(function () {
                 callback();
             }, 500);
-        },
-        setGame: function (game) {
-            this.game = game;
         },
         setActiveShipPosition: function (x, y, ship, isHorizontal) {
             let i = 0;

@@ -42,7 +42,6 @@
                 this.PHASE_PLAY_OPPONENT,
                 this.PHASE_GAME_OVER
             ];
-            // this.playerTurnPhaseIndex = 0;
 
             // initialise les joueurs
             this.setupPlayers();
@@ -84,7 +83,6 @@
                     if (!this.gameIsOver()) {
                         // le jeu n'est pas terminé on recommence un tour de jeu
                         this.currentPhase = this.phaseOrder[this.playerTurnPhaseIndex];
-                        console.log(`phase not over: ${this.currentPhase}`);
                         utils.info("A vous de jouer, choisissez une case !");
                     }
                     break;
@@ -105,12 +103,29 @@
                 case this.PHASE_PLAY_OPPONENT:
                     utils.info("A votre adversaire de jouer...");
                     this.players[1].play();
+                    //render minimap
                     break;
             }
 
         },
         gameIsOver: function () {
-            return false;
+            let i = 0;
+
+            while (i < utils.GRID_LINE) {
+                console.log(this.players[0].grid[i]);
+                
+                if ((this.players[0].tries[i].find(cel => cel === 0) === 0) || (this.players[1].tries[i].find(cel => cel === 0) === 0) ) {
+                    return false
+                }
+                
+                if ((this.players[0].grid[i].some(cel => cel !== 0)) || (this.players[1].grid[i].some(cel => cel !== 0)) ) {
+                    return false
+                }
+
+                i++;
+            }
+
+            return true;
         },
         getPhase: function () {
             if (this.waiting) {
@@ -170,7 +185,6 @@
             if (e.target.classList.contains('cell')) {
                 // si on est dans la phase de placement des bateau
                 if (this.getPhase() === this.PHASE_INIT_PLAYER) {
-                    console.log("click phase init player");
                     // on enregistre la position du bateau, si cela se passe bien (la fonction renvoie true) on continue
                     if (this.players[0].setActiveShipPosition(utils.eq(e.target) - 2, utils.eq(e.target.parentNode))) {
                         // et on passe au bateau suivant (si il n'y en plus la fonction retournera false)
