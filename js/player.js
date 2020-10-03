@@ -37,7 +37,7 @@
 
             if (this.grid[line][col] !== 0) {
                 succeed = true;
-                this.grid[line][col] = 0;
+                this.grid[line][col] = true;
             }
             callback.call(undefined, succeed);
         },

@@ -111,17 +111,20 @@
         gameIsOver: function () {
             let i = 0;
 
+            // const p1Grid = [].concat(...this.players[0].grid);
+            // const p2Grid = [].concat(...this.players[1].grid);
+            // console.warn('p2 GRID');
+            // console.log(p2Grid);
+
+            // if (p1Grid.every(cel => cel === true) || p2Grid.every(cel => cel === true)) {
+            //     return true;
+            // }
+            
             while (i < utils.GRID_LINE) {
-                console.log(this.players[0].grid[i]);
                 
                 if ((this.players[0].tries[i].find(cel => cel === 0) === 0) || (this.players[1].tries[i].find(cel => cel === 0) === 0) ) {
                     return false
                 }
-                
-                if ((this.players[0].grid[i].some(cel => cel !== 0)) || (this.players[1].grid[i].some(cel => cel !== 0)) ) {
-                    return false
-                }
-
                 i++;
             }
 
