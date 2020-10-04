@@ -119,6 +119,9 @@
             const p2LifeRemaining = this.players[1].fleet.reduce((acc, curr) => acc + curr.life, 0);
             
             if (p1LifeRemaining === 0 || p2LifeRemaining === 0) {
+                let msg = 'Le gagnant est';
+                const winner = p1LifeRemaining === 0 ? 'Player 2' : 'Player 1';
+                alert(`${msg} ${winner}`);
                 return true;
             }
             
