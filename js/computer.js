@@ -100,6 +100,9 @@
         },
         renderShips: function () {
             return;
+        },
+        shipSunk: function () {
+            return;
         }
     });
 

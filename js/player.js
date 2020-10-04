@@ -35,13 +35,19 @@
         receiveAttack: function (col, line, callback) {
             var succeed = false;
 
+            console.log(this.grid[line][col]);
             if (this.grid[line][col] !== 0) {
                 succeed = true;
-                
+
                 //enlever une vie au bateau touche
                 const indexOfShip = this.fleet.findIndex(ship => ship.id === this.grid[line][col]);
                 this.fleet[indexOfShip].life--
-                
+
+                if (this.fleet[indexOfShip].life === 0) {
+                    const shipName = this.fleet[indexOfShip].name.toLowerCase();
+                    this.shipSunk(shipName);
+                }
+
                 this.grid[line][col] = true;
                 this.renderShips();
             }
@@ -141,6 +147,11 @@
                     }
                 });
             });
+        },
+        shipSunk: function (shipName) {
+            let node = this.game.shipIcons.querySelector(`.${shipName}`);
+            console.log(node)
+            node.classList.add('sunk');
         },
         setGame: function (game) {
             this.game = game;

@@ -23,6 +23,7 @@
         // garde une référence vers les noeuds correspondant du dom
         grid: null,
         miniGrid: null,
+        shipIcons: null,
 
         // liste des joueurs
         players: [],
@@ -33,6 +34,7 @@
             // initialisation
             this.grid = document.querySelector('.board .main-grid');
             this.miniGrid = document.querySelector('.mini-grid');
+            this.shipIcons = document.querySelector('.fleet');
 
             // défini l'ordre des phase de jeu
             this.phaseOrder = [
