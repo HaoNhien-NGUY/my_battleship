@@ -122,6 +122,7 @@
                 let msg = 'Le gagnant est';
                 const winner = p1LifeRemaining === 0 ? 'Player 2' : 'Player 1';
                 alert(`${msg} ${winner}`);
+                document.location.reload();
                 return true;
             }
             
