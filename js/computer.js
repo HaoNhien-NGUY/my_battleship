@@ -23,7 +23,7 @@
             } while (self.tries[line][column] !== 0);
 
             setTimeout(function () {
-                self.game.fire(this, 0, 0, function (hasSucced) {
+                self.game.fire(this, column, line, function (hasSucced) {
                     // console.log(self.tries[line][column]);
                     // console.log(line);
                     // console.log(column);
@@ -98,6 +98,9 @@
             }
             return true;
         },
+        renderShips: function () {
+            return;
+        }
     });
 
     global.computer = computer;

@@ -37,7 +37,13 @@
 
             if (this.grid[line][col] !== 0) {
                 succeed = true;
+                
+                //enlever une vie au bateau touche
+                const indexOfShip = this.fleet.findIndex(ship => ship.id === this.grid[line][col]);
+                this.fleet[indexOfShip].life--
+                
                 this.grid[line][col] = true;
+                this.renderShips();
             }
             callback.call(undefined, succeed);
         },
@@ -123,7 +129,18 @@
                 });
             });
         },
-        renderShips: function (grid) {
+        renderShips: function () {
+            let self = this;
+
+            this.grid.forEach(function (row, rid) {
+                row.forEach(function (val, col) {
+                    var node = self.game.miniGrid.querySelector('.row:nth-child(' + (rid + 1) + ') .cell:nth-child(' + (col + 1) + ')');
+
+                    if (val === true) {
+                        node.style.backgroundColor = '#000000';
+                    }
+                });
+            });
         },
         setGame: function (game) {
             this.game = game;

@@ -74,8 +74,8 @@
                 this.currentPhase = this.phaseOrder[0];
             }
 
-            console.log(this.currentPhase);
-            console.log(this.players[0].tries);
+            // console.log(this.currentPhase);
+            // console.log(this.players[0].tries);
 
             switch (this.currentPhase) {
                 case this.PHASE_GAME_OVER:
@@ -104,6 +104,7 @@
                     utils.info("A votre adversaire de jouer...");
                     this.players[1].play();
                     //render minimap
+                    // this.players[0].renderShips();
                     break;
             }
 
@@ -111,14 +112,13 @@
         gameIsOver: function () {
             let i = 0;
 
-            // const p1Grid = [].concat(...this.players[0].grid);
-            // const p2Grid = [].concat(...this.players[1].grid);
-            // console.warn('p2 GRID');
-            // console.log(p2Grid);
-
-            // if (p1Grid.every(cel => cel === true) || p2Grid.every(cel => cel === true)) {
-            //     return true;
-            // }
+            //check si tous les bateaux d'une fleet sont a 0 life
+            const p1LifeRemaining = this.players[0].fleet.reduce((acc, curr) => acc + curr.life, 0);
+            const p2LifeRemaining = this.players[1].fleet.reduce((acc, curr) => acc + curr.life, 0);
+            
+            if (p1LifeRemaining === 0 || p2LifeRemaining === 0) {
+                return true;
+            }
             
             while (i < utils.GRID_LINE) {
                 
@@ -156,11 +156,11 @@
                 var ship = this.players[0].fleet[this.players[0].activeShip];
                 if (ship.dom.parentNode) {
                     ship.changeOrientation();
+                    let gridShift = utils.calculateGridShift(this.players[0]);
+                    ship.followCursor(gridShift, e.target.parentNode, e.target);
                 }
             }
 
-            let gridShift = utils.calculateGridShift(this.players[0]);
-            ship.followCursor(gridShift, e.target.parentNode, e.target);
         },
         handleMouseMove: function (e) {
             // on est dans la phase de placement des bateau
@@ -180,7 +180,7 @@
             }
         },
         handleClick: function (e) {
-            console.log(this.players[0].grid);
+            console.log(this.players[1].fleet);
             // self garde une référence vers "this" en cas de changement de scope
             var self = this;
 
@@ -199,6 +199,7 @@
                                 self.renderMiniMap();
                                 // self.players[0].clearPreview();
                                 self.goNextPhase();
+                                console.log(self.players[0].grid);
                             }, function () {
                                 self.stopWaiting();
                                 // sinon, on efface les bateaux (les positions enregistrées), et on recommence
